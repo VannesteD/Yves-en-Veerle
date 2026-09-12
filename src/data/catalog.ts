@@ -1,0 +1,77 @@
+import type { CharcuterieSubcategory, Product, ProductCategory } from "@/lib/types";
+
+const CATALOG_TIMESTAMP = "2026-08-26T00:00:00.000Z";
+
+function product(
+  id: string,
+  name: string,
+  description: string,
+  price: number,
+  category: ProductCategory,
+  unit: string,
+  featured = false,
+  subcategory: CharcuterieSubcategory | null = null,
+): Product {
+  return {
+    id,
+    name,
+    description,
+    price,
+    category,
+    subcategory,
+    image_url: null,
+    unit,
+    in_stock: true,
+    featured,
+    created_at: CATALOG_TIMESTAMP,
+    updated_at: CATALOG_TIMESTAMP,
+  };
+}
+
+// Read-only fallback for local previews and builds without Supabase credentials.
+// Production checkout always resolves products and prices from Supabase.
+export const fallbackProducts: Product[] = [
+  product("1", "Entrecote", "Malse entrecote van Belgische runderen, perfect voor de grill", 28.5, "Rund", "per kg", true),
+  product("2", "Filet Pur", "De meest verfijnde snit, ongeëvenaard mals", 42, "Rund", "per kg", true),
+  product("3", "Stoofvlees", "Ideaal voor een traditionele Vlaamse stoofpot", 16.5, "Rund", "per kg"),
+  product("4", "Rosbief", "Perfect voor in de oven, klassiek en smaakvol", 24.9, "Rund", "per kg"),
+  product("41", "Kotelet", "Sappige varkenskotelet aan het been", 14.5, "Varken", "per kg", true),
+  product("42", "Varkensgebraad", "Klassiek varkensgebraad met zwoerd", 12.9, "Varken", "per kg"),
+  product("43", "Speklappen", "Perfect voor op de barbecue", 11.9, "Varken", "per kg"),
+  product("5", "Kipfilet", "Verse kipfilet van scharrelkippen", 14.9, "Kip", "per kg"),
+  product("6", "Hele Kip", "Hele scharrelkip, ideaal voor de oven", 8.5, "Kip", "per stuk", true),
+  product("7", "Kippenbillen", "Malse kippenbillen met vel", 7.9, "Kip", "per kg"),
+  product("8", "Lamskotelet", "Sappige lamskoteletten, perfect voor de grill", 32, "Lam", "per kg", true),
+  product("9", "Lamsbout", "Hele lamsbout voor een feestelijk gerecht", 28, "Lam", "per kg"),
+  product("10", "Kalkoenfilet", "Magere kalkoenfilet, veelzijdig in gebruik", 16.9, "Gevogelte", "per kg"),
+  product("11", "Eendenborst", "Malse eendenborst met vel", 26, "Gevogelte", "per kg", true),
+  product("12", "Paardenfilet", "Mager en mals paardenfilet", 22, "Paard", "per kg"),
+  product("13", "Paardensteak", "Sappige paardensteak voor de grill", 19.5, "Paard", "per kg"),
+  product("14", "Rundergehakt", "Puur rundergehakt, perfect voor burgers", 14.9, "Gehakt", "per kg"),
+  product("15", "Gemengd Gehakt", "Half om half rund en varken", 12.9, "Gehakt", "per kg", true),
+  product("16", "Kippengehakt", "Mager kippengehakt", 11.9, "Gehakt", "per kg"),
+  product("17", "Boerenworst", "Huisgemaakte boerenworst volgens oud recept", 12.5, "Worsten", "per kg", true),
+  product("18", "Chipolata", "Fijne chipolataworstjes", 14, "Worsten", "per kg"),
+  product("19", "Merguez", "Pittige merguezworstjes", 15, "Worsten", "per kg"),
+  product("20", "Classic Burger", "Huisgemaakte runderburger", 16, "Burgers", "per kg", true),
+  product("21", "Kaashamburger", "Burger met kaas door het gehakt", 17.5, "Burgers", "per kg"),
+  product("22", "Paté Maison", "Huisgemaakte paté met kruiden", 22, "Charcuterie", "per kg", true, "Paté"),
+  product("23", "Ardennenpaté", "Pittige paté in Ardense stijl", 24, "Charcuterie", "per kg", false, "Paté"),
+  product("24", "Vleessalade", "Klassieke vleessalade", 16, "Charcuterie", "per kg", false, "Salades"),
+  product("25", "Kipsalade", "Romige kipsalade", 18, "Charcuterie", "per kg", true, "Salades"),
+  product("26", "Tonijnsalade", "Verse tonijnsalade", 19, "Charcuterie", "per kg", false, "Salades"),
+  product("27", "Droge Worst", "Ambachtelijke droge worst, 3 maanden gerijpt", 32, "Charcuterie", "per kg", true, "Saucisson en dergelijke"),
+  product("28", "Lookworst", "Droge worst met look", 28, "Charcuterie", "per kg", false, "Saucisson en dergelijke"),
+  product("29", "Italiaanse Salami", "Fijngesneden Italiaanse salami", 35, "Charcuterie", "per kg", false, "Salami"),
+  product("30", "Pepersalami", "Pikante pepersalami", 34, "Charcuterie", "per kg", false, "Salami"),
+  product("31", "Achterham", "Klassieke achterham", 18.5, "Charcuterie", "per kg", true, "Hesp"),
+  product("32", "Hespenrollade", "Gerookte hespenrollade", 19.5, "Charcuterie", "per kg", false, "Hesp"),
+  product("33", "Balletjes in Tomatensaus", "Huisbereide gehaktballetjes", 16.5, "Bereide gerechten", "per kg", true),
+  product("34", "Gehaktbrood", "Gevuld gehaktbrood met groenten", 14.9, "Bereide gerechten", "per stuk"),
+  product("35", "Vol-au-vent", "Klassieke Belgische vol-au-vent", 18, "Bereide gerechten", "per kg", true),
+  product("36", "Oude Kaas", "Belegen oude kaas", 16, "Kaas", "per kg"),
+  product("37", "Jonge Kaas", "Romige jonge kaas", 12, "Kaas", "per kg"),
+  product("38", "Cornichons", "Knapperige ingelegde augurken", 6.5, "Conserven", "per pot"),
+  product("39", "Zilveruitjes", "Ingelegde zilveruitjes", 5.5, "Conserven", "per pot"),
+  product("40", "Bouillon", "Huisgemaakte runderbouillon", 8, "Overige", "per liter"),
+];
